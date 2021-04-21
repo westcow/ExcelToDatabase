@@ -32,14 +32,15 @@ public class method {
 
     @PostMapping("/readExcelToDB")
     public String readExcelToDB(String path) {
+        int i = 0;
+        int rowsNum = 0;
         try {
             InputStream is = new FileInputStream(path);
             XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
             //第一行不放数据，放标题
             XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
-            int rowsNum = xssfSheet.getLastRowNum();
-            System.out.println("rowsNum========================>" + rowsNum);
-            for (int i = 1; i < rowsNum+1; i++) {
+            rowsNum = xssfSheet.getLastRowNum();
+            for (i = 1; i < rowsNum+1; i++) {
                 //获取行数据
                 XSSFRow row = xssfSheet.getRow(i);
                 //获取单元格数据
@@ -58,10 +59,10 @@ public class method {
                 user.setGender(row.getCell(9).getStringCellValue());
                 userService.addUser(user);
             }
-            return "执行完毕";
+            return "执行完毕，计划插入" + rowsNum + "条数据，实际插入" + i + "条数据";
         }catch (Exception e) {
             e.printStackTrace();
-            return "执行失败，稍后重试";
+            return "计划插入" + rowsNum + "条数据，执行到第" + (i+1) + "条数据时失败，查看数据是否有误";
         }
     }
 
