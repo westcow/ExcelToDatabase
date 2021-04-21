@@ -1,5 +1,8 @@
+server:
+  port: 8006
+
 mybatis:
-  mapper-locations: classpath:com/bjb/dao/mapper/*.xml
+  mapper-locations: classpath:com/bjb/exceltodb/dao/mapper/*.xml
 
 spring:
   datasource:
@@ -7,3 +10,4 @@ spring:
     url: jdbc:mysql://localhost:3306/own_mysql?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
     username: root
     password:
+
